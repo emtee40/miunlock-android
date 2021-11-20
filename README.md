@@ -7,7 +7,8 @@ https://www.python.org/downloads/
 
 2)After installing, open up Terminal (or Command Prompt) and enter:
 
-```pip install requests
+```
+   pip install requests
    pip install pycryptodome
    pip install pycryptodomex
    pip install adb
