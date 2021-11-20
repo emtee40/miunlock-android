@@ -21,9 +21,11 @@ Linux:
    ```./main.py ```
 
 At the end you will get a hex string in some json (or an error in chinese), put this into a file with a hex editor, name it `token`
-Download github.com/penn5/fastbrute
-Run interpreter.py from fastbrute
-Type:
+4)Download github.com/penn5/fastbrute
+
+5)Run interpreter.py from fastbrute
+
+6)Type:
 ```
 =token
 oem unlock
