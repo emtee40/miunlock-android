@@ -24,7 +24,7 @@ r = UnlockRequest(auth, "unlock.update.miui.com", "/api/v3/unlock/userinfo", {
   "data":{
     "uid":auth.userid,
     "clientId":"1",
-    "clientVersion":"3.3.827.31",
+    "clientVersion":"5.5.224.55",
     "language":"en",
     "pcId":hashlib.md5(auth.pcid.encode("utf-8")).hexdigest(),
     "region":"",
@@ -41,7 +41,7 @@ if use_fastboot:
     token = fdev.Getvar("token").decode("utf-8")
 else:
     product = input("Enter output from `fastboot getvar product` (Ctrl-C to cancel): ")
-    token = input("Enter output from `fastboot getvar token` (Ctrl-C to cancel): ")
+    token = input("Enter output from `fastboot oem get_token -s (your device serial number),combine the strings (left to right) then enter it here` (Ctrl-C to cancel): ")
 logging.debug("product is %s, token is %s", product, token)
 
 
@@ -49,7 +49,7 @@ r = UnlockRequest(auth, "unlock.update.miui.com", "/api/v2/unlock/device/clear",
   "appId":"1",
   "data":{
     "clientId":"1",
-    "clientVersion":"3.3.827.31",
+    "clientVersion":"5.5.224.55",
     "language":"en",
     "pcId":hashlib.md5(auth.pcid.encode("utf-8")).hexdigest(),
     "product":product,
@@ -64,8 +64,8 @@ input("Press Ctrl-C to cancel, or enter to continue. ")
 r = UnlockRequest(auth, "unlock.update.miui.com", "/api/v3/ahaUnlock", {
   "appId":"1",
   "data":{
-    "clientId":"1",
-    "clientVersion":"3.3.827.31",
+    "clientId":"2", # updated client id
+    "clientVersion":"5.5.224.55", # updated version number
     "language":"en",
     "operate":"unlock",
     "pcId":hashlib.md5(auth.pcid.encode("utf-8")).hexdigest(),
@@ -84,11 +84,17 @@ data = r.run()
 logging.debug(data)
 
 if use_fastboot:
-    print("Acquired token! Preparing for unlocking...")
-    input("Press Ctrl-C to cancel, or enter to continue. ")
-    fdev.Download(io.BytesIO(bytes.fromhex(data["encryptData"])), len(bytes.fromhex(data["encryptData"])))
-    time.sleep(0.5)
-    fdev.Oem("unlock")
+    confirm = input("Acquired token! Do you want to unlock now? Enter `yes` or `no`:")
+
+    if confirm == yes:
+        fdev.Download(io.BytesIO(bytes.fromhex(data["encryptData"])), len(bytes.fromhex(data["encryptData"])))
+        time.sleep(0.5)
+        fdev.Oem("unlock")
+
+    else:
+        print("Printing out unlock token. If you want to unlock use `fastboot oem unlock (unlock token)") # trying to be user-friendly
+        print(data["encryptData"])
+
 else:
-    print("Acquired token!")
+    print("Printing out unlock token. If you want to unlock,use `fastboot oem unlock (unlock token)`")
     print(data["encryptData"])

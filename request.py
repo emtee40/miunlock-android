@@ -18,10 +18,10 @@ class UserError(XiaomiError):
 pad = lambda s: s + (16 - len(s) % 16) * bytes([16 - len(s) % 16])
 unpad = lambda s: s[:-s[-1]]
 class Auth():
-    LOGIN_URL="https://account.xiaomi.com/pass/serviceLogin?sid={}&_json=true&passive=true&hidden=false"
+    LOGIN_URL="" # removed since the url doesnt function as intended
     START="&&&START&&&"
     def login_tui(self, sid):
-        self.login(input("Please visit {} and copypaste the data from your web browser here: ".format(self.LOGIN_URL.format(sid))))
+        self.login(input("Go to account.xiaomi.com,log in and paste the code inside code.txt\n(dont forget to change the username and password or else it will fail)\nto devtools console (press f12 then select console) then copypaste the response to here: ".format(self.LOGIN_URL.format(sid)))) # please edit this,this is so bad
     def login(self, data):
         if data[:len(self.START)] != self.START:
             raise UserError("invalid data (missing or invalid &&& section)", 1)

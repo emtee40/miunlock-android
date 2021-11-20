@@ -1,0 +1,20 @@
+var loadScript = (src, callback) => {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = src;
+    script.onload = () => { callback() };
+    document.head.appendChild(script);
+}
+
+loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js", ()=>{
+loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js", ()=>{
+var username = "username (usually your number or email, not your id)";
+var password = "password";
+
+fetch("https://account.xiaomi.com/pass/serviceLoginAuth2", {
+    method: "POST",
+    body: `https%3A%2F%2Faccount.xiaomi.com&sid=unlockApi&qs=%253Fsid%253DunlockApi%2526json%253Dfalse%2526passive%253Dtrue%2526hidden%253Dfalse%2526_snsDefault%253Dfacebook%2526_locale%253Den%2526checkSafePhone%253Dtrue&serviceParam=%7B%22checkSafePhone%22%3Atrue%2C%22checkSafeAddress%22%3Afalse%2C%22lsrp_score%22%3A0.0%7D&_sign=2&V1_passport&user=${encodeURIComponent(username)}&cc=%2B1&hash=${CryptoJS.MD5(password).toString().toUpperCase()}&_json=true`,
+   headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
+}).then(async(r)=>{console.log(await r.text())})
+});
+});
