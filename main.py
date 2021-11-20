@@ -41,7 +41,7 @@ if use_fastboot:
     token = fdev.Getvar("token").decode("utf-8")
 else:
     product = input("Enter output from `fastboot getvar product` (Ctrl-C to cancel): ")
-    token = input("Enter output from `fastboot oem get_token -s (your device serial number),combine the strings (left to right) then enter it here` (Ctrl-C to cancel): ")
+    token = input("Enter `fastboot oem get_token -s (your device serial number)\nCombine the strings (left to right) then enter it here` (Ctrl-C to cancel): ")
 logging.debug("product is %s, token is %s", product, token)
 
 
@@ -92,9 +92,9 @@ if use_fastboot:
         fdev.Oem("unlock")
 
     else:
-        print("Printing out unlock token. If you want to unlock use `fastboot oem unlock (unlock token)") # trying to be user-friendly
+        print("Printing out unlock token.")
         print(data["encryptData"])
 
 else:
-    print("Printing out unlock token. If you want to unlock,use `fastboot oem unlock (unlock token)`")
+    print("Done! Printing out unlock token.")
     print(data["encryptData"])
