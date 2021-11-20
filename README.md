@@ -19,7 +19,17 @@ Windows:
   
 Linux:
    ```./main.py ```
-   
+
+At the end you will get a hex string in some json (or an error in chinese), put this into a file with a hex editor, name it `token`
+Download github.com/penn5/fastbrute
+Run interpreter.py from fastbrute
+Type:
+```
+=token
+oem unlock
+```
+The device will factory reset and unlock successfully.
+
 Credits:
 @GiorgioUghini
 @penn5
