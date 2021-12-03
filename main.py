@@ -36,12 +36,9 @@ if not data["shouldApply"]:
     logging.error("Xiaomi server says shouldApply false, status %d", data["applyStatus"])
     input("Press Ctrl-C to cancel, or enter to continue. ")
 
-if use_fastboot:
-    product = fdev.Getvar("product").decode("utf-8")
-    token = fdev.Getvar("token").decode("utf-8")
-else:
-    product = input("Enter output from `fastboot getvar product` (Ctrl-C to cancel): ")
-    token = input("Enter `fastboot oem get_token -s (your device serial number)\nCombine the strings (left to right) then enter it here` (Ctrl-C to cancel): ")
+
+product = input("Enter output from `fastboot getvar product` (Ctrl-C to cancel): ")
+token = input("Enter output from `fastboot oem get_token -s (your device serial number)`\nCombine the strings (left to right) then enter it here. (Ctrl-C to cancel): ")
 logging.debug("product is %s, token is %s", product, token)
 
 
@@ -86,7 +83,7 @@ logging.debug(data)
 if use_fastboot:
     confirm = input("Acquired token! Do you want to unlock now? Enter `yes` or `no`:")
 
-    if confirm == yes:
+    if confirm == "yes":
         fdev.Download(io.BytesIO(bytes.fromhex(data["encryptData"])), len(bytes.fromhex(data["encryptData"])))
         time.sleep(0.5)
         fdev.Oem("unlock")

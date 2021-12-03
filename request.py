@@ -32,7 +32,7 @@ class Auth():
         logging.debug(data)
         if data["code"] != 0:
             if data["code"] == 70016:
-                raise UserError("Not signed in.", 3)
+                raise UserError("Invalid username or password,find the username and password section in code.txt and change them to your username and password.", 3)
             else:
                 raise XiaomiError("Account server gave unknown code {}, chinese desc is {}".format(data["code"], data["desc"]), 4)
         self.ssecurity = data["ssecurity"]
@@ -48,7 +48,7 @@ class Auth():
         self.cookies = session.cookies
         logging.debug("got cookies from auth redir %s", self.cookies)
         if response.status_code == 401:
-            raise UserException("Sign in failed, nonce reuse", 4)
+            raise UserException("Sign in failed,don't reuse the same output,use a fresh one", 4)
         response.raise_for_status()
         logging.debug("auth redir head %s", response.headers)
         logging.debug("auth redir text %s", response.text)
