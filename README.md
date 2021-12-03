@@ -56,6 +56,7 @@ The device will factory reset and unlock successfully.
    
 4)
    Q)The code gives "Unknown error"
+   
    A)Open a new issue,post a screenshot of the output there and i will try to figure out what's wrong.
    
 # Credits
