@@ -52,7 +52,7 @@ The device will factory reset and unlock successfully.
 3.
    Q)The code says my fastboot token is invalid.
 
-   A)Try using `fastboot getvar token` instead of `fastboot oem get_token -s`
+   A)Try using `fastboot getvar token` instead of `fastboot oem get_token`
    
 4)
    Q)The code gives "Unknown error"
