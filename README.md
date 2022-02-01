@@ -50,7 +50,7 @@ The device will factory reset and unlock successfully.
    A)I'm assuming you rebooted the device during unlocking which you shouldn't.Don't reboot the device during the unlock process or else the unlock token will change.
    
 3.
-   Q)The code says my fastboot token is invalid.
+   Q)The code says my fastboot token is invalid or fastboot says "unknown command".
 
    A)Try using `fastboot getvar token` instead of `fastboot oem get_token`
    
