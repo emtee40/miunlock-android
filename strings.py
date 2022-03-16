@@ -1,7 +1,7 @@
 STRINGS = {
   "en":{
     -1:"Unknown error {code}",
-    10000:"Internal error (bad req)",
+    10000:"Request error, this can be caused by entering invalid token or product",
     10001:"Internal error (sig verif fail)",
     10002:"Too many tries, try again later",
     10003:"Internal server error",

@@ -4,6 +4,7 @@ from request import Auth, UnlockRequest
 logging.basicConfig(level=logging.WARNING)
 
 use_fastboot = False
+
 try:
     from adb.fastboot import FastbootCommands
     from adb.usb_exceptions import *
@@ -37,9 +38,37 @@ if not data["shouldApply"]:
     input("Press Ctrl-C to cancel, or enter to continue. ")
 
 
-product = input("Enter output from `fastboot getvar product` (Ctrl-C to cancel): ")
-token = input("Enter output from `fastboot oem get_token -s (your device serial number)`\nCombine the strings (left to right) then enter it here. (Ctrl-C to cancel): ")
-logging.debug("product is %s, token is %s", product, token)
+
+mtkqcom = input("What is the SoC brand of the device you want to unlock? `mtk` for Mediatek, `qcom` for Qualcomm: ") # This is the worst way to implement this because i suck at everything
+
+if mtkqcom == "mtk":
+    if use_fastboot:
+        product = fdev.Getvar("product").decode("utf-8")
+        token = fdev.Oem("get_token").decode("utf-8")
+        logging.debug("product is %s, token is %s", product, token)
+
+    else:
+        product = input("Enter output from `fastboot getvar product` (Ctrl-C to cancel): ")
+        token = input("Enter output from `fastboot oem get_token` \nCombine the strings (left to right) then enter it here. (Ctrl-C to cancel): ")
+        logging.debug("product is %s, token is %s", product, token)
+
+
+elif mtkqcom == "qcom":
+    if use_fastboot:
+        product = fdev.Getvar("product").decode("utf-8")
+        token = fdev.Getvar("token").decode("utf-8")
+        logging.debug("product is %s, token is %s", product, token)
+
+    else:
+        product = input("Enter output from `fastboot getvar product` (Ctrl-C to cancel): ")
+        token = input("Enter output from `fastboot getvar token` (Ctrl-C to cancel): ")
+        logging.debug("product is %s, token is %s", product, token)
+
+
+else:
+    print("Invalid answer.")
+    exit()
+
 
 
 r = UnlockRequest(auth, "unlock.update.miui.com", "/api/v2/unlock/device/clear", {
