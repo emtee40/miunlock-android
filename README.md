@@ -5,6 +5,7 @@
 To use this:
 
 1)Install Python 3.9 (tick the "Add Python X.X to PATH" option if you are using Windows)
+
 https://www.python.org/downloads/release/python-3910/
 
 2)After installing, open up Terminal (or Command Prompt) and enter:
