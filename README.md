@@ -1,6 +1,8 @@
+# NOTE:This tool CANNOT bypass the 7, 14, 30 day unlock time.
+
 # Instructions
 
-# NOTICE:Do not reboot your device while performing the instructions or else you'll have to start over the unlock process!
+# WARNING:Do not reboot your device while performing the instructions or else you'll have to start over the unlock process!
 
 To use this:
 
