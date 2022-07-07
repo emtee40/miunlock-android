@@ -1,0 +1,4 @@
+requests
+pycryptodomex
+rsa
+adb==1.3.0
