@@ -48,7 +48,7 @@ class Auth():
         self.cookies = session.cookies
         logging.debug("got cookies from auth redir %s", self.cookies)
         if response.status_code == 401:
-            raise UserException("Sign in failed,don't reuse the same output,use a fresh one", 4)
+            raise UserError("Sign in failed,don't reuse the same output,use a fresh one", 4)
         response.raise_for_status()
         logging.debug("auth redir head %s", response.headers)
         logging.debug("auth redir text %s", response.text)
