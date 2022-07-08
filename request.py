@@ -1,4 +1,3 @@
-#!/usr/bin/env python3.7
 # Python 3.7+ only.
 
 import requests, webbrowser, json, logging, hmac, random, binascii, hashlib, urllib, uuid

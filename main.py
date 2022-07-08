@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import logging, hashlib, io, time
 from request import Auth, UnlockRequest
 
