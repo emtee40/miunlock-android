@@ -10,7 +10,7 @@ from strings import STRINGS
 
 class XiaomiError(RuntimeError):
     def __init__(self, message, code):
-        super().__init__(message)
+        super().__init__(f"\33[31m[ERROR]\33[0m: {message}")
         self.code = code
 class UserError(XiaomiError):
     pass
@@ -36,9 +36,9 @@ class Auth():
             else:
                 raise XiaomiError("Account server gave unknown code {}, chinese desc is {}".format(data["code"], data["desc"]), 4)
         elif "notificationUrl" in data and data["notificationUrl"].startswith("https://account.xiaomi.com/identity/authStart"):
-            raise UserError(f"You need to verify your Xiaomi account before beeing able to retreve valid information from servers. Open this link to start verification process: {data['notificationUrl']}", 3)
+            raise UserError(f"You need to verify your Xiaomi account before beeing able to retreve valid information from servers. Open this link to start verification process: \33[34m{data['notificationUrl']}\33[0m", 3)
         elif data["location"] == "":
-            raise XiaomiError("Location URL is empty. This probably means that you've got an error or some sort of notice. Create a issue with full response here, so it can be investigated (but before posting, check for ssecurity, psecurity, userId, cUserId or passToken, and if they are present, censor them): https://github.com/Canny1913/miunlock/issues/new", 5)
+            raise XiaomiError("Location URL is empty. This probably means that you've got an error or some sort of notice. Create a issue with full response here, so it can be investigated (but before posting, check for ssecurity, psecurity, userId, cUserId or passToken, and if they are present, censor them): \33[34mhttps://github.com/Canny1913/miunlock/issues/new\33[0m", 5)
         self.ssecurity = data["ssecurity"]
         self.psecurity = data["psecurity"]
         self.userid = data["userId"]
