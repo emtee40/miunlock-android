@@ -36,6 +36,8 @@ class Auth():
                 raise XiaomiError("Account server gave unknown code {}, chinese desc is {}".format(data["code"], data["desc"]), 4)
         elif "notificationUrl" in data and data["notificationUrl"].startswith("https://account.xiaomi.com/identity/authStart"):
             raise UserError(f"You need to verify your Xiaomi account before beeing able to retreve valid information from servers. Open this link to start verification process: \33[34m{data['notificationUrl']}\33[0m", 3)
+        elif "…" in data["location"]:
+            raise UserError("Your response has been shortened by the browser's DevTool, and because of that, it isn't valid. To fix that, check a quick guide here: \33[34mhttps://github.com/Canny1913/miunlock/pull/8#issuecomment-1186278739\33[0m", 3)
         elif data["location"] == "":
             raise XiaomiError("Location URL is empty. This probably means that you've got an error or some sort of notice. Create a issue with full response here, so it can be investigated (but before posting, check for ssecurity, psecurity, userId, cUserId or passToken, and if they are present, censor them): \33[34mhttps://github.com/Canny1913/miunlock/issues/new\33[0m", 5)
         self.ssecurity = data["ssecurity"]
