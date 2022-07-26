@@ -6,25 +6,21 @@
 
 To use this:
 
-1)Install Python 3.9 (tick the "Add Python X.X to PATH" option if you are using Windows)
+1)Install Python 3.9 or newer (tick the "Add Python X.X to PATH" option if you are using Windows)
 
-https://www.python.org/downloads/release/python-3910/
+https://www.python.org/downloads
 
 2)After installing, open up Terminal (or Command Prompt) and enter:
 
 ```
-   pip install requests
-   pip install pycryptodome
-   pip install pycryptodomex
-   pip install adb
-   ```
+pip3 install -r requirements.txt
+```
+
 3)Run the program and do what program tells you to do
 
-Windows:
-  ```python main.py ```
-  
-Linux:
-   ```./main.py ```
+Windows: ```py -3 main.py``` or ```python main.py```
+
+Linux: ```python3 main.py``` or ```chmod +x main.py && ./main.py```
 
 if the code succeeds it will give you a really long string which is the unlock token, put this into a file with a hex editor, name it `token`
 
